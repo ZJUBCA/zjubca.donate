@@ -1,2 +1,2 @@
 # zjubca.donate
-A open, trusty and easy-to-use donate app based on EOSIO blockchain.
+An open, trusty and easy-to-use donate app based on EOSIO blockchain.
