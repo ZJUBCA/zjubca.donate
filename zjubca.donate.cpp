@@ -7,8 +7,8 @@ void Donate::start()
     name recipient_account = name("donate");
     name foundation_account = name("zjubca");
 
-    _recipients recipient(_self, _self.value);
-    _foundation foundation(_self, _self.value);
+    // _recipients recipient(_self, _self.value);
+    // _foundation foundation(_self, _self.value);
     auto existing1 = recipient.find(recipient_account.value);
     auto existing2 = foundation.find(foundation_account.value);
     if(existing1 == recipient.end())
@@ -52,7 +52,7 @@ void Donate::donatezjubca(name from, name to, asset quantity, string memo)
         std::make_tuple(from, to, quantity, memo)
     ).send();
 
-    _donators donator(_self, _self.value);
+    // _donators donator(_self, _self.value);
     auto existing1 = donator.find(from.value);
     if(existing1 == donator.end())
     {
@@ -72,7 +72,7 @@ void Donate::donatezjubca(name from, name to, asset quantity, string memo)
         });
     }
 
-    _recipients recipient(_self, _self.value);
+    // _recipients recipient(_self, _self.value);
     auto existing2 = recipient.find(to.value);
     if(existing2 == recipient.end())
     {
@@ -116,7 +116,7 @@ void Donate::donateeos(name from, name to, asset quantity, string memo)
         std::make_tuple(from, to, quantity, memo)
     ).send();
 
-    _donators donator(_self, _self.value);
+    // _donators donator(_self, _self.value);
     auto existing1 = donator.find(from.value);
     if(existing1 == donator.end())
     {
@@ -136,7 +136,7 @@ void Donate::donateeos(name from, name to, asset quantity, string memo)
         });
     }
 
-    _recipients recipient(_self, _self.value);
+    // _recipients recipient(_self, _self.value);
     auto existing2 = recipient.find(to.value);
     if(existing2 == recipient.end())
     {
@@ -159,21 +159,21 @@ void Donate::donateeos(name from, name to, asset quantity, string memo)
 
 void Donate::end()
 {
-    _donators donator(_self, _self.value);
+    // _donators donator(_self, _self.value);
     auto donator_begin_it = donator.begin();
     while (donator_begin_it != donator.end())
     {
         donator_begin_it = donator.erase(donator_begin_it);
     }
 
-    _recipients recipient(_self, _self.value);
+    // _recipients recipient(_self, _self.value);
     auto recipient_begin_it = recipient.begin();
     while(recipient_begin_it != recipient.end())
     {
         recipient_begin_it = recipient.erase(recipient_begin_it);
     }
 
-    _foundation foundation(_self, _self.value);
+    // _foundation foundation(_self, _self.value);
     auto foundation_begin_it = foundation.begin();
     while(foundation_begin_it != foundation.end())
     {
@@ -188,8 +188,8 @@ void Donate::sendtofound(name from, name to, string memo)
     eosio_assert(from == _self, "invalid transfer account");
     eosio_assert(to == name("zjubca"), "invalid transfer account");
 
-    _recipients recipient(_self, _self.value);
-    _foundation foundation(_self, _self.value);
+    // _recipients recipient(_self, _self.value);
+    // _foundation foundation(_self, _self.value);
     asset ZJUBCA_quantity = asset(MAX_ZJUBCA_QUANTITY, symbol("ZJUBCA", 4));
     asset EOS_quantity = asset(MAX_EOS_QUANTITY, symbol("EOS", 3));
     auto existing1 = recipient.find(from.value);

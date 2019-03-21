@@ -50,8 +50,15 @@ private:
     typedef multi_index<"recipients"_n, recipient> _recipients;
     typedef multi_index<"foundation"_n, foundation> _foundation;
 
+    _donators donator;
+    _recipients recipient;
+    _foundation foundation;
+
 public:
     using contract::contract;
+
+    Donate(name receiver, name code, datastream<const char*> ds):contract(receiver, code, ds), 
+        donator(receiver, code.value), recipient(receiver, code.value), foundation(receiver, code.value){}
 
     [[eosio::action]] void start();
     [[eosio::action]] void end();
