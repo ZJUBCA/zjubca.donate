@@ -7,8 +7,6 @@ void Donate::start()
     name recipient_account = name("donate");
     name foundation_account = name("zjubca");
 
-    // _recipients recipient(_self, _self.value);
-    // _foundation foundation(_self, _self.value);
     auto existing1 = recipient.find(recipient_account.value);
     auto existing2 = foundation.find(foundation_account.value);
     if (existing1 == recipient.end())
@@ -33,7 +31,6 @@ void Donate::donatezjubca(name from, name to, asset quantity, string memo)
 {
     if (memo == "donatezjubca")
     {
-        print("Enter action: donatezjubca");
         eosio_assert(from != to, "cannot transfer to self");
         require_auth(from);
         eosio_assert(to == _self, "only can donate to the contract");
@@ -50,7 +47,6 @@ void Donate::donatezjubca(name from, name to, asset quantity, string memo)
         auto existing1 = donator.find(from.value);
         if (existing1 == donator.end())
         {
-            print("case 1");
             donator.emplace(_self, [&](auto &new_donator) {
                 new_donator.donator_name = from;
                 new_donator.ZJUBCA_amount = quantity;
@@ -61,105 +57,80 @@ void Donate::donatezjubca(name from, name to, asset quantity, string memo)
         }
         else
         {
-            print("case 2");
-            const auto &st = *existing1;
-            donator.modify(st, same_payer, [&](auto &content) {
+            donator.modify(existing1, same_payer, [&](auto &content) {
                 content.ZJUBCA_amount += quantity;
             });
         }
 
-        // auto existing2 = recipient.find(to.value);
-        // if (existing2 != recipient.end())
-        // {
-        //     const auto &st = *existing2;
-        //     recipient.modify(st, from, [&](auto &content) {
-        //         content.ZJUBCA_amount += quantity;
-        //     });
-        // }
+        auto existing2 = recipient.find(to.value);
+        if (existing2 != recipient.end())
+        {
+            recipient.modify(existing2, same_payer, [&](auto &content) {
+                content.ZJUBCA_amount += quantity;
+            });
+        }
     }
 }
 
 void Donate::donateeos(name from, name to, asset quantity, string memo)
 {
-    eosio_assert(from != to, "cannot transfer to self");
-    require_auth(from);
-    eosio_assert(to == _self, "only can donate to the contract");
-
-    auto sym = quantity.symbol;
-    eosio_assert(sym.is_valid(), "invalid symbol name");
-    eosio_assert(sym == symbol("EOS", 3), "invalid symbol name");
-    // sym.print();
-
-    eosio_assert(quantity.is_valid(), "invalid quantity");
-    eosio_assert(quantity.amount > 0, "must transfer positive quantity");
-
-    eosio_assert(memo.size() <= 256, "memo has more than 256 bytes");
-
-    action(
-        permission_level{from, "active"_n},
-        "eosio.token"_n,
-        "transfer"_n,
-        std::make_tuple(from, to, quantity, memo))
-        .send();
-
-    // _donators donator(_self, _self.value);
-    auto existing1 = donator.find(from.value);
-    if (existing1 == donator.end())
+    if (memo == "donateeos")
     {
-        donator.emplace(_self, [&](auto &new_donator) {
-            new_donator.donator_name = from;
-            new_donator.EOS_amount = quantity;
-            symbol sym = symbol("ZJUBCA", 4);
-            auto zero = asset(0, sym);
-            new_donator.ZJUBCA_amount = zero;
-        });
-    }
-    else
-    {
-        const auto &st = *existing1;
-        donator.modify(st, from, [&](auto &content) {
-            content.EOS_amount += quantity;
-        });
-    }
+        eosio_assert(from != to, "cannot transfer to self");
+        require_auth(from);
+        eosio_assert(to == _self, "only can donate to the contract");
 
-    // _recipients recipient(_self, _self.value);
-    auto existing2 = recipient.find(to.value);
-    if (existing2 == recipient.end())
-    {
-        recipient.emplace(_self, [&](auto &new_recipient) {
-            new_recipient.recipient_name = to;
-            new_recipient.EOS_amount = quantity;
-            symbol sym = symbol("ZJUBCA", 4);
-            auto zero = asset(0, sym);
-            new_recipient.ZJUBCA_amount = zero;
-        });
-    }
-    else
-    {
-        const auto &st = *existing2;
-        recipient.modify(st, from, [&](auto &content) {
-            content.EOS_amount += quantity;
-        });
+        auto sym = quantity.symbol;
+        eosio_assert(sym.is_valid(), "invalid symbol name");
+        eosio_assert(sym == symbol("EOS", 3), "invalid symbol name");
+
+        eosio_assert(quantity.is_valid(), "invalid quantity");
+        eosio_assert(quantity.amount > 0, "must transfer positive quantity");
+
+        eosio_assert(memo.size() <= 256, "memo has more than 256 bytes");
+
+        auto existing1 = donator.find(from.value);
+        if (existing1 == donator.end())
+        {
+            donator.emplace(_self, [&](auto &new_donator) {
+                new_donator.donator_name = from;
+                new_donator.EOS_amount = quantity;
+                symbol sym = symbol("ZJUBCA", 4);
+                auto zero = asset(0, sym);
+                new_donator.ZJUBCA_amount = zero;
+            });
+        }
+        else
+        {
+            donator.modify(existing1, same_payer, [&](auto &content) {
+                content.EOS_amount += quantity;
+            });
+        }
+
+        auto existing2 = recipient.find(to.value);
+        if (existing2 != recipient.end())
+        {
+            recipient.modify(existing2, same_payer, [&](auto &content) {
+                content.EOS_amount += quantity;
+            });
+        }
     }
 }
 
 void Donate::end()
 {
-    // _donators donator(_self, _self.value);
     auto donator_begin_it = donator.begin();
     while (donator_begin_it != donator.end())
     {
         donator_begin_it = donator.erase(donator_begin_it);
     }
 
-    // _recipients recipient(_self, _self.value);
     auto recipient_begin_it = recipient.begin();
     while (recipient_begin_it != recipient.end())
     {
         recipient_begin_it = recipient.erase(recipient_begin_it);
     }
 
-    // _foundation foundation(_self, _self.value);
     auto foundation_begin_it = foundation.begin();
     while (foundation_begin_it != foundation.end())
     {
@@ -174,8 +145,6 @@ void Donate::sendtofound(name from, name to, string memo)
     eosio_assert(from == _self, "invalid transfer account");
     eosio_assert(to == name("zjubca"), "invalid transfer account");
 
-    // _recipients recipient(_self, _self.value);
-    // _foundation foundation(_self, _self.value);
     asset ZJUBCA_quantity = asset(MAX_ZJUBCA_QUANTITY, symbol("ZJUBCA", 4));
     asset EOS_quantity = asset(MAX_EOS_QUANTITY, symbol("EOS", 3));
     auto existing1 = recipient.find(from.value);
@@ -237,11 +206,8 @@ extern "C"
             switch (action)
             {
             case "start"_n.value:
-                /* code */
-                //print(action);
                 execute_action(name(receiver), name(code), &Donate::start);
                 break;
-                //break;
             case "end"_n.value:
                 execute_action(name(receiver), name(code), &Donate::end);
                 break;
@@ -251,20 +217,16 @@ extern "C"
             default:
                 break;
             }
-            //EOSIO_DISPATCH(Donate, (start)(end)(sendtofound));
         }
         else if ((code == "zjubca.token"_n.value || code == "eosio.token"_n.value) && action == "transfer"_n.value)
         {
-            //EOSIO_DISPATCH_HELPER(Donate, (donatezjubca)(donateeos));
             switch (code)
             {
             case "zjubca.token"_n.value:
-                /* code */
-                execute_action(name(receiver), name(code), &Donate::donatezjubca);
+                execute_action(name(receiver), name(receiver), &Donate::donatezjubca);
                 break;
-                //break;
             case "eosio.token"_n.value:
-                execute_action(name(receiver), name(code), &Donate::donateeos);
+                execute_action(name(receiver), name(receiver), &Donate::donateeos);
                 break;
             default:
                 break;
