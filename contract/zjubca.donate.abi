@@ -1,0 +1,186 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Sat Mar 23 20:59:41 2019",
+    "version": "eosio::abi/1.1",
+    "structs": [
+        {
+            "name": "donateeos",
+            "base": "",
+            "fields": [
+                {
+                    "name": "from",
+                    "type": "name"
+                },
+                {
+                    "name": "to",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "donatezjubca",
+            "base": "",
+            "fields": [
+                {
+                    "name": "from",
+                    "type": "name"
+                },
+                {
+                    "name": "to",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "donator",
+            "base": "",
+            "fields": [
+                {
+                    "name": "donator_name",
+                    "type": "name"
+                },
+                {
+                    "name": "ZJUBCA_amount",
+                    "type": "asset"
+                },
+                {
+                    "name": "EOS_amount",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "end",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "foundation",
+            "base": "",
+            "fields": [
+                {
+                    "name": "foundation_name",
+                    "type": "name"
+                },
+                {
+                    "name": "ZJUBCA_amount",
+                    "type": "asset"
+                },
+                {
+                    "name": "EOS_amount",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "recipient",
+            "base": "",
+            "fields": [
+                {
+                    "name": "recipient_name",
+                    "type": "name"
+                },
+                {
+                    "name": "ZJUBCA_amount",
+                    "type": "asset"
+                },
+                {
+                    "name": "EOS_amount",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "sendtofound",
+            "base": "",
+            "fields": [
+                {
+                    "name": "from",
+                    "type": "name"
+                },
+                {
+                    "name": "to",
+                    "type": "name"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "start",
+            "base": "",
+            "fields": []
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "donateeos",
+            "type": "donateeos",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "donatezjubca",
+            "type": "donatezjubca",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "end",
+            "type": "end",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "sendtofound",
+            "type": "sendtofound",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "start",
+            "type": "start",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "donators",
+            "type": "donator",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "foundation",
+            "type": "foundation",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "recipients",
+            "type": "recipient",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": [],
+    "abi_extensions": []
+}
