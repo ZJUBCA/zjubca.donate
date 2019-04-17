@@ -1,0 +1,22 @@
+.TopBar{
+    position: fixed;
+    z-index: 2;
+    left:0;
+    top:0;
+    min-height:56px;
+    width :100%;
+    background:var(--md-theme-default-primary, #448aff);
+    color:#FFFFFF;
+    font-size:1.2em;
+    font-weight: bold;
+    font-family: Avenir,Helvetica,Arial,sans-serif;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.spaceTopBar{
+    min-height:56px;
+    width :100%;
+    background: #ffffff;
+
+}
