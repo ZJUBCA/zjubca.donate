@@ -1,38 +1,16 @@
 import React from 'react';
 import { List ,Row,Col} from 'antd';
 
-const data = [
-  {
-    name: 'nonefishstar',
-    date:'2019-2-17',
-    type:'EOS',
-    scale:20.000
-  },
-  {
-    name: 'userrobotsss',
-    date:'2019-2-17',
-    type:'ZJUBCA',
-    scale:2000.000
-  },
-  {
-    name: 'userrobotsss',
-    date:'2019-2-17',
-    type:'EOS',
-    scale:200.000  
-  },
-  {
-    name: 'userrobotsss',
-    date:'2019-2-17',
-    type:'EOS',
-    scale:2000.000
-  },
-];
+
 export class DonatorsList extends React.Component {
+    constructor(props){
+        super();
+    }
     render() {
         return (
             <List
                 itemLayout="vertical"
-                dataSource={data}
+                dataSource={this.props.donators}
                 renderItem={item => (
                 <List.Item>
                     <Row>

@@ -1,4 +1,21 @@
-.StateBarCol{
-    display: flex;
-    align-items: flex-start;
+.StateBarColRight{
+    text-align: right;
+}
+.StateBarColLeft{
+    text-align: left;
+}
+.BoldTitle{
+    font-family:Avenir,Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.DataTitle{
+    font-family:Avenir,Helvetica,Arial,sans-serif;
+    font-weight:500;
+    color:#000000;
+}
+.Data{
+    font-family:Avenir,Helvetica,Arial,sans-serif;
+    font-weight:bolder;
+    color:#6260e0;
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal, Button ,Row,Col} from 'antd';
 import { Select} from 'antd';
+import { message} from 'antd';
 import { InputNumber } from 'antd';
 const Option = Select.Option;
+
 export class DonateModal extends React.Component {
     constructor(props){
         super(props);
@@ -25,12 +27,30 @@ export class DonateModal extends React.Component {
     this.setState({scale:scale});
   }
   handleOK=()=>{
+    let {type,scale}=this.state;
     this.setModalVisible(false);
-    console.log("收到捐款");
-    console.log(`币种：${this.state.type}，一共${this.state.scale}枚`);
+    if((type==='EOS'&&scale>this.props.UserInfo.EOS)||(type==='ZJUBCA'&&scale>this.props.UserInfo.ZJUBCA))
+    {
+      message.error(`捐款失败！您账户上的${type}不足${scale}`);
+    } 
+    else{
+      let date = new Date(); 
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+      let currentdate = year + '-' + month + '-' + strDate;
+      this.props.handleDonate(type,this.props.UserInfo.name,currentdate,scale);
+      message.success(`捐款成功!收到${type}共${scale}枚`)
+    }
   }
   handleCancel=()=>{
-    this.setModalVisible(false);
+    this.setModalVisible(false);  
     console.log("取消捐款");
   }
   render() {
@@ -77,7 +97,7 @@ export class DonateModal extends React.Component {
             step={0.0001}
             min={0.0000} 
             max={100.0000} 
-            defaultValue={0.0000} 
+            defaultValue={this.state.scale} 
             onChange={this.handleScaleChange} 
         />
         </Col>

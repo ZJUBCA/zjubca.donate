@@ -4,6 +4,9 @@ import DonatorsList from '../DonatorsList/DonatersList';
 import Donate from '../Donate/Donate';
 const TabPane = Tabs.TabPane;
 export class ContentBar extends React.Component {
+    constructor(props){
+        super();
+    }
     render() {
         return (
             <Tabs defaultActiveKey="1">
@@ -15,7 +18,7 @@ export class ContentBar extends React.Component {
                 </span>
                 } 
             key="1">
-            <DonatorsList/>
+            <DonatorsList donators={this.props.donators}/>
             </TabPane>
             <TabPane 
                 tab={
@@ -25,7 +28,7 @@ export class ContentBar extends React.Component {
                 </span>
                 } 
             key="2">
-            <Donate/>
+            <Donate handleDonate={this.props.handleDonate} UserInfo={this.props.UserInfo}/>
             </TabPane>
         </Tabs>
         );
