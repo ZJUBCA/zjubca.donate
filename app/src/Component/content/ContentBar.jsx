@@ -6,7 +6,7 @@ const TabPane = Tabs.TabPane;
 export class ContentBar extends React.Component {
     render() {
         return (
-            <Tabs defaultActiveKey="2">
+            <Tabs defaultActiveKey="1">
             <TabPane 
                 tab={
                 <span>

@@ -28,7 +28,9 @@ export class StateBar extends React.Component {
             extra={false}
             style={{ width: '96%',margin:'2%',textAlign:'center'}}
         >
-            <Row>
+            <Row
+                type="flex" justify="space-around" align="middle"
+            >
                 <Col
                     span={3}
                 >
@@ -43,7 +45,9 @@ export class StateBar extends React.Component {
                 </Col>
             </Row>
             <Divider/>
-            <Row>
+            <Row
+                type="flex" justify="space-around" align="middle"
+            >
                 <Col
                     span={3}
                 >

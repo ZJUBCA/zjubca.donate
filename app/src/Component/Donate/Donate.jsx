@@ -37,9 +37,6 @@ export class Donate extends React.Component {
                 <Row>
                     <DonateModal/>
                 </Row>
-                <Row>
-                    感谢前辈这些年在协会中的付出，欢迎您常回家看看~
-                </Row>
             </div>
         );
      }
