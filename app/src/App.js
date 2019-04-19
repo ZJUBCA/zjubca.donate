@@ -17,9 +17,9 @@ class App extends Component {
       <div className="App">
         <Router>
           <TopBar/>
-          <Route exact path="/" component={StateBar}/>
-          <Route exact path="/home" component={StateBar}/>
-          <Route exact path="/about" component={About}/>
+          <Route exact path="/zjubca.donate/" component={StateBar}/>
+          <Route exact path="/zjubca.donate/home" component={StateBar}/>
+          <Route exact path="/zjubca.donate/about" component={About}/>
        </Router>
        
 
