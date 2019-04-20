@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TopBar from './Component/TopBar/TopBar';
 import StateBar from './Component/StateBar/StateBar';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { HashRouter as Router, Route} from "react-router-dom";
 import About from './Component/About/about'
 /* import ContentBar from './Component/content/ContentBar'; */
 class App extends Component {
