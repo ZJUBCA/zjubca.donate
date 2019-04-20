@@ -1,7 +1,7 @@
 {
   "name": "app",
   "version": "0.1.0",
-  "homepage": "https://zjufishboy.github.io/zjubca.donate",
+  "homepage": "https://donate.zjubca.org",
   "private": true,
   "dependencies": {
     "antd": "^3.16.3",

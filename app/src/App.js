@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import TopBar from './Component/TopBar/TopBar';
 import StateBar from './Component/StateBar/StateBar';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch} from "react-router-dom";
+import Redirects from './Component/Redirects/Redirects'
 import About from './Component/About/about'
 /* import ContentBar from './Component/content/ContentBar'; */
 class App extends Component {
@@ -15,11 +16,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        
         <Router>
-          <TopBar/>
-          <Route exact path="/zjubca.donate/" component={StateBar}/>
-          <Route exact path="/zjubca.donate/home" component={StateBar}/>
-          <Route exact path="/zjubca.donate/about" component={About}/>
+        <TopBar/>
+          <Switch>
+            <Route exact path="/" component={Redirects}/>
+            <Route exact path="/home" component={StateBar}/>
+            <Route exact path="/about" component={About}/>
+          </Switch>
        </Router>
        
 
