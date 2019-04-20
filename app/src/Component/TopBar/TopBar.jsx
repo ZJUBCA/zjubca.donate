@@ -11,14 +11,14 @@ export class TopBar extends React.Component {
                   <Col 
                     style={{fontSize:'1.2em',textAlign:'center'}}
                     span={3}>
-                    <Link to="/zjubca.donate/home">
+                    <Link to="/home">
                       <Icon type="home"  theme="filled" style={{color:"white"}}/>
                     </Link>                  
                   </Col>
                   <Col 
                     style={{fontSize:'1.2em',textAlign:'center'}}
                     span={3}>
-                    <Link to="/zjubca.donate/about">
+                    <Link to="/about">
                       <Icon type="question-circle" style={{color:"white"}}/>
                     </Link>
                     </Col>

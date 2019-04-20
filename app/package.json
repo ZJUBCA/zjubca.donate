@@ -15,7 +15,7 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "predeploy": "yarn build && cp CNAME build/CNAME",
+    "predeploy": "yarn build",  
     "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

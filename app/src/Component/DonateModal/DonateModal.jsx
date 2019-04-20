@@ -71,12 +71,12 @@ export class DonateModal extends React.Component {
         >
         <Row>
         <Col
-            span={6}
+            span={9}
         >
             币种({this.state.type})：
         </Col>
         <Col
-            span={18}
+            span={15}
         >
           <Select defaultValue={this.state.type} style={{ width: "100%" }} onChange={this.handleChangeSelect}>
             <Option value="EOS" >EOS</Option>
@@ -86,12 +86,12 @@ export class DonateModal extends React.Component {
         </Row>
         <Row>
         <Col
-            span={6}
+            span={9}
         >
             捐赠数额：
         </Col>
         <Col
-            span={18}
+            span={15}
         >
         <InputNumber 
             style={{ width: "100%" }} 
