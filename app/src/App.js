@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import TopBar from './Component/TopBar/TopBar';
 import StateBar from './Component/StateBar/StateBar';
-import { HashRouter as Router, Route} from "react-router-dom";
-import About from './Component/About/about'
-/* import ContentBar from './Component/content/ContentBar'; */
+import { HashRouter as Router, Route,Switch} from "react-router-dom";
+import About from './Component/About/about';
+import Redirects from './Component/Redirects/Redirects';
 class App extends Component {
   constructor(props){
     super(props);
@@ -17,12 +17,12 @@ class App extends Component {
       <div className="App">
         <Router>
           <TopBar/>
-          <Route exact path="/zjubca.donate/" component={StateBar}/>
-          <Route exact path="/zjubca.donate/home" component={StateBar}/>
-          <Route exact path="/zjubca.donate/about" component={About}/>
+          <Switch>
+            <Route exact path="/" component={Redirects}/>
+            <Route exact path="/home" component={StateBar}/>
+            <Route exact path="/about" component={About}/>
+          </Switch>
        </Router>
-       
-
        </div>
      );
    }
