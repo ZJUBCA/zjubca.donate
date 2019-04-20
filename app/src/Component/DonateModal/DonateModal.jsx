@@ -46,7 +46,8 @@ export class DonateModal extends React.Component {
         }
       let currentdate = year + '-' + month + '-' + strDate;
       this.props.handleDonate(type,this.props.UserInfo.name,currentdate,scale);
-      message.success(`捐款成功!收到${type}共${scale}枚`)
+      message.loading(`用户${this.props.UserInfo.name}的捐款请求处理中`,1).then(()=>message.success(`捐款成功!收到${type}共${scale}枚`,2));
+      
     }
   }
   handleCancel=()=>{
@@ -96,7 +97,6 @@ export class DonateModal extends React.Component {
             style={{ width: "100%" }} 
             step={0.0001}
             min={0.0000} 
-            max={100.0000} 
             defaultValue={this.state.scale} 
             onChange={this.handleScaleChange} 
         />
